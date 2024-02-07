@@ -1,4 +1,4 @@
-### Proyecto: PI_1_ML_OPS
+## Proyecto: PI_1_ML_OPS
 
 Este proyecto representa el rol de un Ingeniero MLOps, fusionando las habilidades de un Ingeniero de Datos y un Científico de Datos, en el contexto de la plataforma de videojuegos multinacional Steam. El objetivo es desarrollar un Producto Mínimo Viable (MVP) que incluya una API desplegada en la nube y la implementación de un modelo de Machine Learning para generar recomendaciones de juegos.
 
