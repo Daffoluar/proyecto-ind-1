@@ -33,6 +33,7 @@ pytz
 PyYAML
 scikit-learn
 six
+sklearn
 sniffio
 starlette
 typing_extensions
