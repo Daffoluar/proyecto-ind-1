@@ -31,6 +31,7 @@ python-dotenv
 python-multipart
 pytz
 PyYAML
+scikit-learn
 six
 sniffio
 starlette
