@@ -1,54 +1,53 @@
-## PI N°1 ML_OPS
+### Proyecto: PI_1_ML_OPS
 
-Este proyecto simula el rol de un MLOps Engineer, es decir, la combinación de un Data Engineer y Data Scientist, para la plataforma multinacional de videojuegos Steam. Para su desarrollo, se entregan unos datos y se solicita un Producto Mínimo Viable que muestre una API deployada en un servicio en la nube y la aplicación de un modelo de Machine Learning para hacer recomendaciones de juegos.
-## Introducción
+Este proyecto representa el rol de un Ingeniero MLOps, fusionando las habilidades de un Ingeniero de Datos y un Científico de Datos, en el contexto de la plataforma de videojuegos multinacional Steam. El objetivo es desarrollar un Producto Mínimo Viable (MVP) que incluya una API desplegada en la nube y la implementación de un modelo de Machine Learning para generar recomendaciones de juegos.
 
-Para este proyecto se nos proporciona un conjunto de tres archivos en formato JSON: de steam (Steam es una plataforma de distribución digital de videojuegos desarrollada por Valve Corporation) para poder trabajar en ellos y crear un Producto Minimo Viable (MVP), que contiene una la implementaciónde una API y con un modelo de Machine Learning. los datos provienen de los archivos siguientes:
+### Introducción
 
-    steam_games información relacionada a los juegos dentro de la plataforma Steam. Por ejemplo: Nombre del juego, género, fecha de lanzamiento, entre otras.
+El proyecto se basa en un conjunto de datos en formato JSON relacionados con la plataforma de videojuegos Steam, proporcionando la base para el desarrollo de un Producto Mínimo Viable (MVP). Los archivos de datos incluyen:
 
-    user_reviews información que detalla las reseñas realizadas por los usuarios de la plataforma Steam.
+    steam_games: Contiene información sobre los juegos en la plataforma Steam, como nombre, género y fecha de lanzamiento, entre otros detalles.
 
-    user_items información acerca de la actividad de los usuarios dentro de la plataforma Steam.
+    user_reviews: Proporciona detalles sobre las reseñas realizadas por los usuarios de Steam.
 
-## ETL
+    user_items: Ofrece información sobre la actividad de los usuarios en la plataforma Steam.
 
-Se realizó la extracción, transformación y carga (ETL) de los tres conjuntos de datos entregados. En esta fase del proyecto se realiza la extracción de datos, a fin de familiarizarse con ellos y comenzar con la etapa de limpieza de datos que nos permita el correcto entedimiento. Terminada la limpieza se generará el conjunto de datos para la siguiente fase, estos se guardaron en formato parquet.
+### ETL (Extracción, Transformación y Carga)
 
-Los detalles del ETL para cada Dataset se puede ver en ETL
-## Feature engineering
+Se realizó el proceso de ETL para los tres conjuntos de datos entregados. Este proceso incluye la extracción de datos, la limpieza de los mismos para facilitar su comprensión y el almacenamiento de los datos limpios en formato Parquet.
 
-En esta etapa se realizo el analisis de sentimientos a los reviews de los usuarios. Para ello se creó una nueva columna llamada 'sentiment_analysis' que reemplaza a la columna que contiene los reviews donde clasifica los sentimientos de los comentarios con la siguiente escala:
+Detalles específicos del proceso de ETL para cada conjunto de datos se encuentran en la sección correspondiente.
 
-    0 si es malo,
-    1 si es neutral o esta sin review
-    2 si es positivo.
+### Ingeniería de características
 
-Todos los detalles del desarrollo se pueden ver en la Jupyter Notebook Analisis de sentimientos
-## EDA
+Se llevó a cabo un análisis de sentimientos sobre las reseñas de los usuarios. Se creó una nueva columna llamada 'sentiment_analysis' para clasificar los sentimientos de los comentarios en una escala de:
 
-Se lleva a cabo el analisis exploratorio de los datos, identificando patrones y tendencias de los juegos y generos mas recomendados por los uduarios, a parte de identificar outliers, el codigo utilizado se puede visualizar en EDA
+    0 para sentimientos negativos,
+    1 para neutros o sin reseña, y
+    2 para sentimientos positivos.
 
-## API
+Los detalles completos del desarrollo se pueden encontrar en la Jupyter Notebook "Análisis de Sentimientos".
 
-Para su desarrollo se utilizó FastAPI, dicho Framework permite que la API pueda ser consumida desde la WEB, la misma consta de 6 endpoints: def developer( desarrollador : str ): Cantidad de items y porcentaje de contenido Free por año según empresa desarrolladora.
+### Análisis Exploratorio de Datos (EDA)
 
-def userdata( User_id : str ): Debe devolver cantidad de dinero gastado por el usuario, el porcentaje de recomendación en base a reviews.recommend y cantidad de items.
+Se realizó un análisis exploratorio de los datos para identificar patrones y tendencias, así como outliers. El código utilizado está disponible en la sección EDA.
 
-def UserForGenre( genero : str ): Debe devolver el usuario que acumula más horas jugadas para el género dado y una lista de la acumulación de horas jugadas por año de lanzamiento.
+### API
 
-def best_developer_year( año : int ): Devuelve el top 3 de desarrolladores con juegos MÁS recomendados por usuarios para el año dado. (reviews.recommend = True y comentarios positivos)
+Se desarrolló una API utilizando FastAPI, permitiendo su consumo desde la web. La API consta de 6 endpoints:
 
-def developer_reviews_analysis( desarrolladora : str ): Según el desarrollador, se devuelve un diccionario con el nombre del desarrollador como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor positivo o negativo.
+    developer: Proporciona la cantidad de ítems y el porcentaje de contenido gratuito por año según la empresa desarrolladora.
+    userdata: Devuelve el dinero gastado por un usuario, el porcentaje de recomendación basado en reseñas y la cantidad de ítems.
+    UserForGenre: Retorna el usuario con más horas jugadas para un género dado y una lista de la acumulación de horas jugadas por año de lanzamiento.
+    best_developer_year: Devuelve el top 3 de desarrolladores con más juegos recomendados por usuarios para un año dado.
+    developer_reviews_analysis: Proporciona un análisis de reseñas de usuarios categorizadas como positivas o negativas para un desarrollador específico.
+    recomendacion_juego: Recibe el ID de un juego y devuelve una lista con 5 juegos recomendados similares.
 
-def recomendacion_juego( id de producto ): Ingresando el id de producto, deberíamos recibir una lista con 5 juegos recomendados similares al ingresado
+Detalles de implementación se encuentran en la sección API.
+### Modelo de Machine Learning
 
-los detalles de codigo se encuentran en API
+El modelo se basa en la similitud del coseno, estableciendo una relación ítem-ítem para recomendar juegos similares. También se aplica un filtro usuario-juego para recomendar ítems basados en usuarios similares.
 
-## Modelo de aprendizaje automático
+### Despliegue
 
-El modelo se basa en la similitud del coseno, el modelo tiene una relación ítem-ítem, esto es, se toma un juego y en base a que tan similar es ese juego con el resto de los juegos se recomiendan similares. En el segundo caso, el modelo aplicar un filtro usuario-juego, es decir, toma un usuario, encuentra usuarios similares y se recomiendan ítems que a esos usuarios similares les gustaron.
-
-## Deployment
-
-Para el deploy de la API se seleccionó la plataforma Render, a continuacion el link donde se puede ver el funcionamiento de la API desplegado Deploy
+Para el despliegue de la API se utilizó la plataforma Render. Se puede acceder al funcionamiento de la API desplegada a través del siguiente enlace: Deploy.
