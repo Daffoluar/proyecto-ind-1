@@ -50,4 +50,4 @@ El modelo se basa en la similitud del coseno, estableciendo una relación ítem-
 
 ### Despliegue
 
-Para el despliegue de la API se utilizó la plataforma Render. Se puede acceder al funcionamiento de la API desplegada a través del siguiente enlace: Deploy.
+Para el despliegue de la API se utilizó la plataforma Render. Se puede acceder al funcionamiento de la API desplegada a través del siguiente enlace: Deploy. Link: https://proyecto-ind-1.onrender.com/docs#/
