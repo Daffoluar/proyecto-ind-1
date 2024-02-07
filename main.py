@@ -13,7 +13,7 @@ async def my_function():
 
 @app.get("/developer/{desarrollador}")
 async def desarrollador(desarrollador:str):
-    df1 = pd.read_parquet('Dataset Finales/steam_games.parquet')
+    df1 = pd.read_parquet('DataSets Finales/steam_games.parquet')
     df_desarrollador = df1[df1['developer'] == desarrollador.capitalize()]
     df_resultado = pd.DataFrame()
     df_resultado['Años'] = df_desarrollador['release_date'].unique()
@@ -24,7 +24,7 @@ async def desarrollador(desarrollador:str):
 
 @app.get('/User_id/{user_id}')
 async def userdata(user_id: str):
-    df2 = pd.read_parquet('Dataset Finales/endpoint_2.parquet')
+    df2 = pd.read_parquet('DataSets Finales/endpoint_2.parquet')
     df_user_id = df2[df2['user_id'] == user_id]
     dinero_gastado= (df_user_id['price'].sum())
     porcentaje_recomen = len(df_user_id['recommend']=='True')/len(df_user_id)*100
@@ -34,7 +34,7 @@ async def userdata(user_id: str):
 
 @app.get('/Genero/{genero}')
 async def UserForGenre(genero: str):
-    df3 = pd.read_parquet('Dataset Finales/endpoint_3.parquet')
+    df3 = pd.read_parquet('DataSets Finales/endpoint_3.parquet')
     data = df3[df3['genres'] == genero.capitalize()]
     usuario_horas = data.groupby('user_id')['playtime_forever'].sum().idxmax(0)
     lista_horas = data.groupby('release_date')['playtime_forever'].sum().reset_index() 
@@ -45,7 +45,7 @@ async def UserForGenre(genero: str):
 
 @app.get('/Año')
 async def best_developer_year(año:int ): 
-    df4 = pd.read_parquet('Dataset Finales/endpoint_4_5.parquet')
+    df4 = pd.read_parquet('DataSets Finales/endpoint_4_5.parquet')
     df4['release_date'] = df4['release_date'].astype(int)
     data = df4[df4['release_date']== año]
     data = data[(data['recommend'] == True) & (data['sentiment_analysis'] == 2)].sort_values(by= 'developer',ascending= False)
@@ -56,7 +56,7 @@ async def best_developer_year(año:int ):
     
 @app.get('/Desarrolladora/{desarrolladora}')
 async def developer_reviews_analysis(desarrolladora: str ):
-    df = pd.read_parquet('Dataset Finales/endpoint_4_5.parquet')
+    df = pd.read_parquet('DataSets Finales/endpoint_4_5.parquet')
     df_desarrolladora = df[df['developer'] == desarrolladora]
     positivos = (df_desarrolladora['sentiment_analysis'] == 2).count()
     negativos = (df_desarrolladora['sentiment_analysis'] == 0).count()
@@ -64,7 +64,7 @@ async def developer_reviews_analysis(desarrolladora: str ):
 
 @app.get('/Recomendacion_juego/{id_juego}')  
 async def recomendacion_juego(id_juego:int):
-    df = pd.read_parquet('Dataset Finales/recomendacion.parquet')
+    df = pd.read_parquet('DataSets Finales/recomendacion.parquet')
     # Verifica si existe el id.
     if id_juego not in df['item_id'].values:
         return "ID de juego no encontrado"
