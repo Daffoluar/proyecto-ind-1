@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import linear_kernel
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
  
-app = FastAPI()
+app = FastAPI(title="Dante Henry PI 1 API")
 
 @app.get('/')
 async def my_function():
